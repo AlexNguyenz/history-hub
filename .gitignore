@@ -11,3 +11,32 @@ next-env.d.ts
 # build
 /app
 dist
+
+# ============================================
+# RUST NATIVE MODULE (native/)
+# ============================================
+
+# Rust build artifacts
+native/target/
+native/Cargo.lock
+
+# Native binaries - KEEP ONLY FOR YOUR PLATFORM
+# Uncomment others if you want to exclude them:
+# native/*.node
+native/*.darwin-x64.node
+# native/*.darwin-arm64.node
+native/*.win32-x64-msvc.node
+native/*.linux-x64-gnu.node
+native/*.linux-x64-musl.node
+
+# napi-rs generated files (will be regenerated)
+native/.cargo-cache
+native/npm/
+
+# Test files (optional - remove if you want to commit tests)
+native/test.js
+native/test-real-claude.js
+
+# Lock files
+yarn.lock
+package-lock.json

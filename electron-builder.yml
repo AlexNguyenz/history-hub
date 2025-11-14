@@ -1,6 +1,6 @@
-appId: com.example.nextron
-productName: My Nextron App
-copyright: Copyright © 2018 Yoshihide Shiono
+appId: com.historyhub.app
+productName: Claude Code History Hub
+copyright: Copyright © 2024
 directories:
   output: dist
   buildResources: resources
@@ -9,4 +9,38 @@ files:
     filter:
       - package.json
       - app
+      - native/**/*
+      - '!native/target/**/*'
+      - '!native/src/**/*'
+      - '!native/Cargo.toml'
+      - '!native/build.rs'
+      - '!native/.cargo-ok'
+
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  category: public.app-category.developer-tools
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+        - ia32
+
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Development
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
 publish: null
