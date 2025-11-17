@@ -3,7 +3,10 @@
   "name": "history-hub",
   "description": "Browse and explore your Claude Code conversation history",
   "version": "1.0.0",
-  "author": "Nate",
+  "author": {
+    "name": "Nate",
+    "email": "nate@example.com"
+  },
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
