@@ -22,9 +22,9 @@ native/Cargo.lock
 
 # Native binaries - KEEP ONLY FOR YOUR PLATFORM
 # Uncomment others if you want to exclude them:
-# native/*.node
+native/*.node
 native/*.darwin-x64.node
-# native/*.darwin-arm64.node
+native/*.darwin-arm64.node
 native/*.win32-x64-msvc.node
 native/*.linux-x64-gnu.node
 native/*.linux-x64-musl.node

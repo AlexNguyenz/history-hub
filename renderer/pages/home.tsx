@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import { getAllProjects, ClaudeProject } from '../lib/claude-reader';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import { getAllProjects, ClaudeProject } from "../lib/claude-reader";
 
 export default function HomePage() {
   const [projects, setProjects] = useState<ClaudeProject[]>([]);
@@ -18,8 +18,8 @@ export default function HomePage() {
       const allProjects = await getAllProjects();
       setProjects(allProjects);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load projects');
-      console.error('Error loading projects:', err);
+      setError(err instanceof Error ? err.message : "Failed to load projects");
+      console.error("Error loading projects:", err);
     } finally {
       setLoading(false);
     }
@@ -98,9 +98,6 @@ export default function HomePage() {
                           <h3 className="text-lg font-semibold text-gray-900 mb-2">
                             📁 {project.name}
                           </h3>
-                          <p className="text-sm text-gray-500 mb-2">
-                            {project.path}
-                          </p>
                           <div className="flex gap-4 text-sm">
                             <span className="text-gray-600">
                               💬 {project.sessionCount} sessions
@@ -122,7 +119,10 @@ export default function HomePage() {
           <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
             <p>Powered by Rust 🦀 + Next.js ⚡ + Electron 🖥️</p>
             <p className="mt-1">
-              Reading from: <code className="bg-gray-100 px-2 py-1 rounded">~/.claude/projects</code>
+              Reading from:{" "}
+              <code className="bg-gray-100 px-2 py-1 rounded">
+                ~/.claude/projects
+              </code>
             </p>
           </div>
         </div>

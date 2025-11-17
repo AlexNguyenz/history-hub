@@ -216,6 +216,9 @@ pub struct ClaudeSession {
     pub total_output_tokens: Option<i32>,
     pub has_thinking: bool,
     pub has_tool_use: bool,
+
+    // Project info
+    pub cwd: Option<String>,
 }
 
 // ============================================
@@ -367,6 +370,7 @@ pub fn get_session_summary(file_path: String) -> Result<ClaudeSession> {
     let mut total_output_tokens = 0;
     let mut has_thinking_flag = false;
     let mut has_tool_use_flag = false;
+    let mut cwd: Option<String> = None;
 
     for line in reader.lines() {
         if let Ok(line) = line {
@@ -378,6 +382,13 @@ pub fn get_session_summary(file_path: String) -> Result<ClaudeSession> {
                 // Update session ID
                 if let Some(sid) = &entry.session_id {
                     session_id = sid.clone();
+                }
+
+                // Capture cwd if available (only need to do this once)
+                if cwd.is_none() {
+                    if let Some(ref cwd_value) = entry.cwd {
+                        cwd = Some(cwd_value.clone());
+                    }
                 }
 
                 // Count messages
@@ -432,6 +443,7 @@ pub fn get_session_summary(file_path: String) -> Result<ClaudeSession> {
         total_output_tokens: if total_output_tokens > 0 { Some(total_output_tokens) } else { None },
         has_thinking: has_thinking_flag,
         has_tool_use: has_tool_use_flag,
+        cwd,
     })
 }
 
