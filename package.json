@@ -12,7 +12,7 @@
     "build:win": "yarn build:native && nextron build --win",
     "build:linux": "yarn build:native && nextron build --linux",
     "build:all": "yarn build:native && nextron build --mac --win --linux",
-    "build:native": "cd native && source $HOME/.cargo/env && npm run build",
+    "build:native": "cd native && . $HOME/.cargo/env && npm run build",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
