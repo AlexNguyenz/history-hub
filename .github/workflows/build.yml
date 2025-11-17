@@ -8,9 +8,11 @@ on:
 
 jobs:
   build:
+    timeout-minutes: 60
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
+      fail-fast: false
 
     runs-on: ${{ matrix.os }}
 
@@ -40,30 +42,37 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+        timeout-minutes: 10
 
       - name: Install native dependencies
         run: cd native && npm install
+        timeout-minutes: 5
 
       - name: Build native module
         run: yarn build:native
+        timeout-minutes: 10
 
       - name: Build Electron app (macOS)
         if: matrix.os == 'macos-latest'
         run: yarn build:mac
+        timeout-minutes: 30
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Electron app (Windows)
         if: matrix.os == 'windows-latest'
         run: yarn build:win
+        timeout-minutes: 30
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Electron app (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: yarn build:linux
+        timeout-minutes: 30
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USE_HARD_LINKS: false
 
       - name: Upload artifacts (macOS)
         if: matrix.os == 'macos-latest'
