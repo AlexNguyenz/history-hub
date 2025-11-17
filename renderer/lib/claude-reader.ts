@@ -15,20 +15,44 @@ declare global {
 }
 
 // ============================================
-// TYPE DEFINITIONS
+// TYPE DEFINITIONS - Enhanced
 // ============================================
+
+// Content types from Rust parser
+export type ContentItem =
+  | { type: 'text'; text: string }
+  | { type: 'thinking'; thinking: string; signature?: string }
+  | { type: 'tool_use'; id: string; name: string; input: Record<string, any> }
+  | { type: 'tool_result'; tool_use_id: string; content: any; is_error?: boolean }
+  | { type: 'image'; source: { type: string; media_type: string; data: string } };
 
 export interface ClaudeMessage {
   messageId: string;
   sessionId: string;
   role: 'user' | 'assistant';
-  content: string;
+  content: string;  // Merged text content
   timestamp: string;
+
+  // Enhanced fields
+  rawContent: string;  // JSON string of full content array
+  hasThinking: boolean;
+  hasToolUse: boolean;
+  hasImages: boolean;
+
+  // Optional fields
   parentId?: string;
   model?: string;
   stopReason?: string;
+
+  // Token usage
   inputTokens?: number;
   outputTokens?: number;
+  cacheCreationTokens?: number;
+  cacheReadTokens?: number;
+
+  // Additional metadata
+  isSidechain?: boolean;
+  userType?: string;
 }
 
 export interface ClaudeSession {
@@ -39,6 +63,12 @@ export interface ClaudeSession {
   assistantMessageCount: number;
   firstTimestamp?: string;
   lastTimestamp?: string;
+
+  // Enhanced stats
+  totalInputTokens?: number;
+  totalOutputTokens?: number;
+  hasThinking: boolean;
+  hasToolUse: boolean;
 }
 
 export interface ClaudeProject {
