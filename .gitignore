@@ -37,6 +37,5 @@ native/npm/
 native/test.js
 native/test-real-claude.js
 
-# Lock files
-yarn.lock
+# Lock files (keep yarn.lock for CI/CD reproducibility)
 package-lock.json
